@@ -4,18 +4,21 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+
+let currentDirection = '';
+
 app.get('/', (req, res) => {
-  res.send('Hello, this is the root path.');
+  res.send(`Current Direction: ${currentDirection}`);
 });
 
 app.post('/control', (req, res) => {
-  // Handle control signals sent from the Android app
-  const controlData = req.body; // Assuming the app sends JSON data
-  // Send control signals to the ESP32
-  // You may use a library like 'axios' to send requests to the ESP32
-  // You can also send a response back to the app for confirmation
+  // Handle control signals sent from the app
+  const controlData = req.body;
 
-  res.json({ status: 'Control signals sent to ESP32' });
+  // Update the current direction
+  currentDirection = controlData.direction;
+
+  res.json({ status: 'Control signals received and updated.' });
 });
 
 app.listen(port, () => {
