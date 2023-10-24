@@ -1,12 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-
-// Serve static files (like HTML, CSS, and JavaScript) from the "public" directory
-app.use(express.static('public'));
+const port = 3000; // You can change the port number if needed
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.send('Hi Akshat');
 });
 
 app.listen(port, () => {
