@@ -4,6 +4,9 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.get('/', (req, res) => {
+  res.send('Hello, this is the root path.');
+});
 
 app.post('/control', (req, res) => {
   // Handle control signals sent from the Android app
