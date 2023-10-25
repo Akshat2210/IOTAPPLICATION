@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Current Direction</title>
+</head>
+<body>
+  <h1>Current Direction: <span id="direction">No direction received</span></h1>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:3000');
+
+    ws.onmessage = (event) => {
+      document.getElementById('direction').innerText = event.data;
+    };
+  </script>
+</body>
+</html>
