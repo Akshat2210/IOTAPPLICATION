@@ -36,6 +36,11 @@ wss.on('connection', (ws) => {
   });
 });
 
+// Serve an HTML page with the current direction
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
 app.use(express.static('public'));
 
 server.listen(3000, () => {
