@@ -1,26 +1,43 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const port = 3000;
+const http = require('http');
+const WebSocket = require('ws');
 
-app.use(bodyParser.json());
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
 let currentDirection = '';
+let clients = new Set(); // Store connected clients
 
-app.get('/', (req, res) => {
-  res.send(`Current Direction: ${currentDirection}`);
+wss.on('connection', (ws) => {
+  // Add the connected client to the set
+  clients.add(ws);
+
+  // Send the current direction to the connected client
+  ws.send(JSON.stringify({ direction: currentDirection }));
+
+  // Handle messages from the client (Java application)
+  ws.on('message', (message) => {
+    // Update the current direction when a message is received
+    const controlData = JSON.parse(message);
+    currentDirection = controlData.direction;
+
+    // Broadcast the updated direction to all connected clients
+    clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({ direction: currentDirection }));
+      }
+    });
+  });
+
+  // Handle client disconnection
+  ws.on('close', () => {
+    clients.delete(ws);
+  });
 });
 
-app.post('/control', (req, res) => {
-  // Handle control signals sent from the app
-  const controlData = req.body;
+app.use(express.static('public'));
 
-  // Update the current direction
-  currentDirection = controlData.direction;
-
-  res.json({ status: 'Control signals received and updated.' });
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+server.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
 });
