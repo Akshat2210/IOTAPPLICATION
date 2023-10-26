@@ -1,28 +1,36 @@
 const http = require('http');
-const WebSocket = require('ws');
+const fetch = require('node-fetch');
+const fs = require('fs');
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end('<div id="direction">No direction received</div>');
-});
+const port = 3000;
+const githubRepoURL = 'https://raw.githubusercontent.com/YourGitHubUsername/YourRepoName/main/index.html';
 
-const wss = new WebSocket.Server({ server });
+const server = http.createServer(async (req, res) => {
+  if (req.url === '/app') {
+    try {
+      // Fetch the 'index.html' file from your GitHub repository.
+      const response = await fetch(githubRepoURL);
 
-let currentDirection = 'No direction received';
-
-wss.on('connection', (ws) => {
-  ws.send(currentDirection);
-
-  ws.on('message', (message) => {
-    currentDirection = message;
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(currentDirection);
+      if (response.status === 200) {
+        const htmlContent = await response.text();
+        // Set the Content-Type header to indicate that it's an HTML file.
+        res.setHeader('Content-Type', 'text/html');
+        res.writeHead(200);
+        res.end(htmlContent);
+      } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('File not found');
       }
-    });
-  });
+    } catch (error) {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('Internal Server Error');
+    }
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found');
+  }
 });
 
-server.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+server.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
