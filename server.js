@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
         res.end(data);
       }
     });
-  } else {
+  }   else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Not Found');
   }
