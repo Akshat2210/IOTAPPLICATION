@@ -34,8 +34,8 @@
   </head>
   <body class="noselect" align="center" style="background-color:white">
      
-    <h1 style="color: teal;text-align:center;"></h1>
-    <h2 style="color: teal;text-align:center;">IOT Implementation &#128663;</h2>
+    <h1 style="color: teal;text-align:center;">Hash Include Electronics</h1>
+    <h2 style="color: teal;text-align:center;">Wi-Fi &#128663; Control</h2>
     
     <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
       <tr>
@@ -64,20 +64,23 @@
     </table>
 
     <script>
-      var webSocketUrl = "ws:\/\/" + window.location.hostname + "/app/contol";
-      var websocket;
-      
-      function initWebSocket() 
-      {
-        websocket = new WebSocket(webSocketUrl);
-        websocket.onopen    = function(event){};
-        websocket.onclose   = function(event){setTimeout(initWebSocket, 2000);};
-        websocket.onmessage = function(event){};
-      }
-
+      const server = http.createServer((req, res) => {
+        if (req.url === '/app/control') {
+          // Replace 'index.html' with your actual file name.
+          const filePath = path.join(__dirname, 'index.html');
+          res.writeHead(200, { 'Content-Type': 'text/plain' });
+          res.end(value+'');
+          
+        }   else {
+          
+          res.writeHead(404, { 'Content-Type': 'text/plain' });
+          res.end('Not Found');
+        }
+      });
+      const val=0;
       function onTouchStartAndEnd(value) 
       {
-        websocket.send(value);
+        val=value;
       }
           
       window.onload = initWebSocket;
