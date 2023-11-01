@@ -18,11 +18,30 @@ const server = http.createServer((req, res) => {
         res.end(data);
       }
     });
-  }   else {
+  } else   if (req.method === 'POST' && req.url=='/app/controls') {
+    let data = '';
+    req.on('data', (chunk) => {
+        data += chunk;
+    });
+    
+    req.on('end', () => {
+        try {
+            const parsedData = JSON.parse(data);
+
+            console.log('Received data:', parsedData.data);
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('Data received successfully.');
+        } catch (error) {
+            res.writeHead(400, { 'Content-Type': 'text/plain' });
+            res.end('Invalid data format.');
+        }
+    });
+}  else {
     
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Not Found');
-  }
+  } 
+
 });
 
 server.listen(port, () => {

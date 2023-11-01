@@ -1,95 +1,104 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <style>
-    .arrows {
-      font-size:70px;
-      color:red;
-    }
-    .circularArrows {
-      font-size:80px;
-      color:blue;
-    }
-    td {
-      background-color:black;
-      border-radius:25%;
-      box-shadow: 5px 5px #888888;
-    }
-    td:active {
-      transform: translate(5px,5px);
-      box-shadow: none; 
-    }
-
-    .noselect {
-      -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-         -khtml-user-select: none; /* Konqueror HTML */
-           -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently
-                                      supported by Chrome and Opera */
-    }
-    </style>
-  </head>
-  <body class="noselect" align="center" style="background-color:white">
-     
-    <h1 style="color: teal;text-align:center;">Hash Include Electronics</h1>
-    <h2 style="color: teal;text-align:center;">Wi-Fi &#128663; Control</h2>
-    
-    <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
-      <tr>
-        <td ontouchstart='onTouchStartAndEnd("5")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11017;</span></td>
-        <td ontouchstart='onTouchStartAndEnd("1")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8679;</span></td>
-        <td ontouchstart='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11016;</span></td>
-      </tr>
-      
-      <tr>
-        <td ontouchstart='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8678;</span></td>
-        <td></td>    
-        <td ontouchstart='onTouchStartAndEnd("4")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8680;</span></td>
-      </tr>
-      
-      <tr>
-        <td ontouchstart='onTouchStartAndEnd("7")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11019;</span></td>
-        <td ontouchstart='onTouchStartAndEnd("2")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8681;</span></td>
-        <td ontouchstart='onTouchStartAndEnd("8")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11018;</span></td>
-      </tr>
-    
-      <tr>
-        <td ontouchstart='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("0")'><span class="circularArrows" >&#8634;</span></td>
-        <td style="background-color:white;box-shadow:none"></td>
-        <td ontouchstart='onTouchStartAndEnd("10")' ontouchend='onTouchStartAndEnd("0")'><span class="circularArrows" >&#8635;</span></td>
-      </tr>
-    </table>
-
-    <script>
-      const server = http.createServer((req, res) => {
-        if (req.url === '/app/control') {
-          // Replace 'index.html' with your actual file name.
-          const filePath = path.join(__dirname, 'index.html');
-          res.writeHead(200, { 'Content-Type': 'text/plain' });
-          res.end(value+'');
-
-        }   else {
-          
-          res.writeHead(404, { 'Content-Type': 'text/plain' });
-          res.end('Not Found');
-        }
-      });
-      const val=0;
-      function onTouchStartAndEnd(value) 
-      {
-        val=value;
+  <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      <style>
+      .arrows {
+        font-size:70px;
+        color:red;
       }
-      server.listen(3000, () => {
-        console.log(`Server is running on http://localhost:${port}`);
-      });
-      document.getElementById("mainTable").addEventListener("touchend", function(event){
-        event.preventDefault()
-      });      
-    </script>
+      .circularArrows {
+        font-size:80px;
+        color:blue;
+      }
+      td {
+        background-color:black;
+        border-radius:25%;
+        box-shadow: 5px 5px #888888;
+      }
+      td:active {
+        transform: translate(5px,5px);
+        box-shadow: none; 
+      }
+  
+      .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+           -khtml-user-select: none; /* Konqueror HTML */
+             -moz-user-select: none; /* Firefox */
+              -ms-user-select: none; /* Internet Explorer/Edge */
+                  user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
+      }
+      </style>
+    </head>
+    <body class="noselect" align="center" style="background-color:white">
+       
+      <h1 style="color: teal;text-align:center;">Hash Include Electronics</h1>
+      <h2 style="color: teal;text-align:center;">Wi-Fi &#128663; Control</h2>
+      
+      <table id="mainTable" style="width:400px;margin:auto;table-layout:fixed" CELLSPACING=10>
+        <tr>
+          <td ontouchstart='onTouchStartAndEnd("5")' ontouchend='console.log( "hi there" )'><span class="arrows" >&#11017;</span></td>
+          <td ontouchstart='onTouchStartAndEnd("1")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8679;</span></td>
+          <td ontouchstart='onTouchStartAndEnd("6")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11016;</span></td>
+        </tr>
+        
+        <tr>
+          <td ontouchstart='onTouchStartAndEnd("3")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8678;</span></td>
+          <td></td>    
+          <td ontouchstart='onTouchStartAndEnd("4")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8680;</span></td>
+        </tr>
+        
+        <tr>
+          <td ontouchstart='onTouchStartAndEnd("7")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11019;</span></td>
+          <td ontouchstart='onTouchStartAndEnd("2")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#8681;</span></td>
+          <td ontouchstart='onTouchStartAndEnd("8")' ontouchend='onTouchStartAndEnd("0")'><span class="arrows" >&#11018;</span></td>
+        </tr>
+      
+        <tr>
+          <td ontouchstart='onTouchStartAndEnd("9")' ontouchend='onTouchStartAndEnd("0")'><span class="circularArrows" >&#8634;</span></td>
+          <td style="background-color:white;box-shadow:none"></td>
+          <td ontouchstart='onTouchStartAndEnd("10")' ontouchend='onTouchStartAndEnd("0")'><span class="circularArrows" >&#8635;</span></td>
+        </tr>
+      </table>
+  
+      <script>
+        function sendData(data, endpoint) {
+          // Create a JSON object with the data to send
+          const dataToSend = { data: data };
+          console.log("sending data");
+          // Make a POST request to the server
+          fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dataToSend)
+          })
+          .then(response => {
+              if (response.ok) {
+                  console.log('Data sent successfully.');
+              } else {
+                  console.error('Failed to send data.');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+      }
+      function onTouchStartAndEnd(value) {
+        console.log("button clicked");
+        sendData(value, '/app/controls');
+    }
+            
+        document.getElementById("mainTable").addEventListener("touchstart", function(event){
+          event.preventDefault()
+        });      
+sendData("hi server!","http://localhost:3000/app/controls");
+      </script>
     
-  </body>
-</html> 
-
+    </body>
+  </html> 
+  
+  
