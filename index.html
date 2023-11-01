@@ -70,7 +70,7 @@
           const filePath = path.join(__dirname, 'index.html');
           res.writeHead(200, { 'Content-Type': 'text/plain' });
           res.end(value+'');
-          
+
         }   else {
           
           res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -82,7 +82,7 @@
       {
         val=value;
       }
-          
+        server.begin();
       window.onload = initWebSocket;
       document.getElementById("mainTable").addEventListener("touchend", function(event){
         event.preventDefault()
